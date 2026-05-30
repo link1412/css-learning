@@ -2,6 +2,14 @@
 
 基于 W3C 官方规范的 CSS 学习网站，理解原理而非死记规则。
 
+## 一键部署
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/link1412/css-learning)
+
+点击上方按钮，用 GitHub 账号登录 Vercel 即可一键部署（Next.js 项目零配置，全部保持默认即可）。部署完成后会得到一个 `*.vercel.app` 网址，手机/电脑均可访问。
+
+> 连接仓库后，之后每次推送到 `main` 分支，Vercel 会自动重新构建并部署，无需手动操作。
+
 ## 项目特点
 
 - **基于官方规范**：直接从 W3C CSS 规范学习，理解底层原理
