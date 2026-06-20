@@ -21,6 +21,7 @@ import { hasDemo } from '@/components/demos/has-demo';
 import { SpecContent } from '@/components/SpecContent';
 import { TutorialRenderer } from '@/components/TutorialRenderer';
 import { SidebarNav } from '@/components/SidebarNav';
+import { SpecMaturityBadge } from '@/components/SpecMaturityBadge';
 import { TocSidebar } from '@/components/TocSidebar';
 import { MobileTocSheet } from '@/components/MobileTocSheet';
 import type { TocItem } from '@/components/TocSidebar';
@@ -105,6 +106,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
         <div>
           <div className="flex items-center gap-3 mb-4">
             <Badge variant="outline">Chapter {String(mod.number).padStart(2, '0')} / {totalModules}</Badge>
+            <SpecMaturityBadge slug={mod.id} />
             {mod.status === 'current' && <Badge>{t('ui.currentlyLearning')}</Badge>}
             {mod.status === 'completed' && <Badge variant="secondary">{t('ui.completed')}</Badge>}
             {mod.status === 'locked' && (

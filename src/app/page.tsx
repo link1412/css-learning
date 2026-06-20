@@ -14,6 +14,7 @@ import {
   Play,
 } from 'lucide-react';
 import { stages, getStageModules, getStats, modules } from '@/data/modules';
+import { SpecMaturityBadge } from '@/components/SpecMaturityBadge';
 import { useLocaleContext } from '@/contexts/LocaleContext';
 import { useProgress } from '@/hooks/useProgress';
 import { hasDemo } from '@/components/demos/has-demo';
@@ -179,7 +180,8 @@ export default function Home() {
                                 </div>
                                 <CardDescription>{t(mod.title)}</CardDescription>
                               </CardHeader>
-                              <CardContent className="p-0">
+                              <CardContent className="p-0 space-y-2">
+                                <div><SpecMaturityBadge slug={mod.id} /></div>
                                 <div className="text-xs text-muted-foreground flex items-center justify-between">
                                   <span>{sectionCount} {t('ui.sections')} · {demoCount} {t('ui.demos')}</span>
                                   <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
