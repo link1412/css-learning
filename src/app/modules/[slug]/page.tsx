@@ -22,6 +22,7 @@ import { SpecContent } from '@/components/SpecContent';
 import { TutorialRenderer } from '@/components/TutorialRenderer';
 import { SidebarNav } from '@/components/SidebarNav';
 import { SpecMaturityBadge } from '@/components/SpecMaturityBadge';
+import { SelfCheckCard } from '@/components/SelfCheckCard';
 import { TocSidebar } from '@/components/TocSidebar';
 import { MobileTocSheet } from '@/components/MobileTocSheet';
 import type { TocItem } from '@/components/TocSidebar';
@@ -345,6 +346,9 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
             ))}
           </div>
         )}
+
+        {/* Self-check checklist (完成基准) */}
+        <SelfCheckCard slug={mod.id} />
 
         {/* Navigation */}
         <div className="flex items-center justify-between pt-8 border-t">
