@@ -6,16 +6,23 @@ import { useEffect, useRef, useState } from 'react';
  * 渲染 Mermaid 图表为 SVG。
  * - mermaid 库（~500KB）通过动态 import 懒加载，仅在含图表的页面才下载。
  * - 跟随站点明/暗主题：监听 <html> 的 class 变化并重新渲染。
+ * - 健壮性：等容器有实际宽度再渲染（避免在 0 宽度容器，如初始折叠/未布局的
+ *   Accordion 中渲染出空 SVG），并在容器尺寸变化时重渲染。
  */
 export function MermaidDiagram({ code, caption }: { code: string; caption?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [error, setError] = useState<string | null>(null);
-  const idRef = useRef(`mermaid-${Math.random().toString(36).slice(2)}`);
 
   useEffect(() => {
     let cancelled = false;
+    let ro: ResizeObserver | undefined;
+    let lastWidth = 0;
 
-    async function render() {
+    async function render(): Promise<boolean> {
+      const el = ref.current;
+      if (!el) return false;
+      const width = el.clientWidth;
+      if (width === 0) return false; // 容器尚无宽度，稍后重试
       try {
         const mermaid = (await import('mermaid')).default;
         const isDark = document.documentElement.classList.contains('dark');
@@ -25,28 +32,47 @@ export function MermaidDiagram({ code, caption }: { code: string; caption?: stri
           securityLevel: 'strict',
           fontFamily: 'inherit',
         });
-        const { svg } = await mermaid.render(idRef.current, code);
+        const id = 'm' + Math.random().toString(36).slice(2);
+        const { svg } = await mermaid.render(id, code);
         if (!cancelled && ref.current) {
           ref.current.innerHTML = svg;
+          lastWidth = width;
           setError(null);
         }
+        return true;
       } catch (e) {
         if (!cancelled) setError(e instanceof Error ? e.message : String(e));
+        return true; // 已得到（错误）结果，停止重试
       }
     }
 
-    render();
+    // 等到容器有宽度再首次渲染（用 rAF 轮询，最多约 1 秒）
+    let tries = 0;
+    function attempt() {
+      if (cancelled) return;
+      render().then((done) => {
+        if (!done && tries++ < 60) requestAnimationFrame(attempt);
+      });
+    }
+    attempt();
+
+    // 容器尺寸变化（如 Accordion 展开）时重渲染
+    if (ref.current && typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(() => {
+        const w = ref.current?.clientWidth ?? 0;
+        if (w > 0 && w !== lastWidth) render();
+      });
+      ro.observe(ref.current);
+    }
 
     // 主题切换时重渲染
-    const observer = new MutationObserver(() => render());
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
+    const mo = new MutationObserver(() => render());
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     return () => {
       cancelled = true;
-      observer.disconnect();
+      ro?.disconnect();
+      mo.disconnect();
     };
   }, [code]);
 

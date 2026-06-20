@@ -34,6 +34,7 @@ export const sections: Section[] = [
         '**层叠排序**:根据层叠上下文(stacking context)和 z-index 确定盒子的 Z 轴绘制顺序',
         '**绘制**:浏览器按确定的顺序将盒子绘制到画布上'
       ] },
+      { type: 'diagram', code: 'flowchart TD\n  A["元素树<br/>element tree"] --> B["盒子生成<br/>display 决定生成何种盒"]\n  B --> C["盒子分类<br/>块级 / 行内级 / 原子行内级"]\n  C --> D["定位方案<br/>常规流 / 浮动 / 绝对定位"]\n  D --> E["建立格式化上下文<br/>BFC · IFC · flex/grid FC"]\n  E --> F["尺寸计算<br/>基于包含块 + 盒模型"]\n  F --> G["位置确定<br/>在 FC 内定坐标"]\n  G --> H["层叠排序<br/>stacking context + z-index"]\n  H --> I["绘制到画布<br/>paint"]', caption: '从元素树到上屏：视觉格式化模型的八个阶段' },
 
       { type: 'heading', text: '画布与视口' },
       { type: 'paragraph', text: '**画布**(canvas)是文档渲染的**理论上无限大**的二维表面。它是抽象概念——你的文档可以任意长、任意宽,不受物理屏幕尺寸限制。**视口**(viewport)是用户实际能看到的窗口——浏览器窗口在桌面端,整个屏幕在移动端。' },

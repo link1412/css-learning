@@ -74,6 +74,7 @@ export const sections: Section[] = [
     tutorial: [
       { type: 'heading', text: '盒子的四个区域' },
       { type: 'paragraph', text: '每个 CSS 盒子从内到外由四个同心矩形区域组成。最内层是 **content area**（内容区域），包含元素的实际内容（文本、图片、子元素等）。content area 外围是 **padding area**（内边距区域），提供内容与边框之间的空间。padding 外围是 **border area**（边框区域），可以绘制边框线。最外层是 **margin area**（外边距区域），提供盒子与其他盒子之间的间距。' },
+      { type: 'diagram', code: 'flowchart TB\n  subgraph M["margin area（外边距 · 始终透明）"]\n    direction TB\n    subgraph B["border area（边框）"]\n      direction TB\n      subgraph P["padding area（内边距）"]\n        direction TB\n        C["content area（内容区域）<br/>文本 · 图片 · 子元素"]\n      end\n    end\n  end', caption: '四个同心区域：margin ⊃ border ⊃ padding ⊃ content；背景延伸到 padding edge，margin 透明' },
       { type: 'code', code: '/* 四个区域的可视化 */\n.box {\n  width: 200px;              /* content area 宽度 */\n  height: 100px;             /* content area 高度 */\n  padding: 20px;             /* padding area 四周各 20px */\n  border: 5px solid blue;    /* border area 四周各 5px，蓝色实线 */\n  margin: 30px;              /* margin area 四周各 30px */\n  background: lightblue;     /* 背景延伸到 padding edge */\n}', lang: 'css', caption: '四个区域的定义' },
       { type: 'heading', text: '四种边缘（edge）' },
       { type: 'paragraph', text: '每个区域的外边界称为 **edge**（边缘）。从内到外依次是：**content edge**（内容边缘，也叫 inner edge 内边缘）、**padding edge**（内边距边缘）、**border edge**（边框边缘）、**margin edge**（外边距边缘，也叫 outer edge 外边缘）。这些边缘围成的矩形区域就是对应的 box（如 padding edge 围成 padding-box）。' },
