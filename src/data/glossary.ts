@@ -27,6 +27,7 @@ import { glossaryTerms as transformsTerms } from './chapters/transforms';
 import { glossaryTerms as modernTerms } from './chapters/modern';
 import { glossaryTerms as multicolTerms } from './chapters/multicol';
 import { glossaryTerms as tablesTerms } from './chapters/tables';
+import { glossaryTerms as methodTerms } from './chapters/method';
 
 export interface GlossaryEntry {
   /** 中文翻译 */
@@ -62,6 +63,7 @@ export const glossary: Record<string, GlossaryEntry> = {
   ...modernTerms,
   ...multicolTerms,
   ...tablesTerms,
+  ...methodTerms,
 };
 
 export function lookupGlossary(term: string): GlossaryEntry | null {
