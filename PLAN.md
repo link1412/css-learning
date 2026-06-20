@@ -77,25 +77,36 @@
 
 ## 章节进度追踪
 
-| 章节 | 标题 | 状态 | 关联规范 | 章节内容 | Demo |
-|------|------|------|----------|----------|------|
-| Ch 01 | Introduction to CSS | 🟢 内容完成 | — | 6/6 | 0/0 |
-| Ch 02 | Syntax, Values & Units | 🟢 内容完成 | css-syntax-3, css-values-3/4 | 10/10 | 3/3 |
-| Ch 03 | Selectors | 🟢 内容完成 | selectors-3/4 | 8/8 | 2/2 |
-| Ch 04 | Cascading & Inheritance | 🟢 内容完成 | css-cascade-4/5, css-variables-1 | 7/7 | 2/3 |
-| Ch 05 | Media Queries | ⚪ 未开始 | mediaqueries-4/5 | - | - |
-| Ch 06 | Box Model | 🟡 骨架完成 | css-box-3/4, css-logical-1 | 5/5 | 1/1 |
-| Ch 07 | Visual Formatting Model | ⚪ 未开始 | css-display-3, css-position-3, css-flexbox-1, css-grid-1/2 | - | - |
-| Ch 08 | Sizing & Alignment | ⚪ 未开始 | css-sizing-3/4, css-align-3 | - | - |
-| Ch 09 | Visual Effects | ⚪ 未开始 | css-overflow-3, css-masking-1 | - | - |
-| Ch 10 | Generated Content & Lists | ⚪ 未开始 | css-content-3, css-lists-3 | - | - |
-| Ch 11 | Colors & Backgrounds | ⚪ 未开始 | css-color-4/5, css-backgrounds-3, css-images-3 | - | - |
-| Ch 12 | Fonts | ⚪ 未开始 | css-fonts-4 | - | - |
-| Ch 13 | Text & Writing Modes | ⚪ 未开始 | css-text-3, css-text-decor-3, css-writing-modes-4 | - | - |
-| Ch 14 | Transforms & Animations | ⚪ 未开始 | css-transforms-1/2, css-transitions-1, css-animations-1, css-easing-1 | - | - |
-| Ch 15 | Modern CSS | ⚪ 未开始 | css-contain-2, css-nesting-1, css-scope-1 | - | - |
+> **当前状态（2026-06-20）**：全部 **22 章内容完成并上线**，按概念依赖链排序（见第 0 章）。成熟度依据 CSS Snapshot 2026 / 各 TR 页头（截至 2026 年中）。
 
-状态说明：⚪ 未开始 → 🟡 骨架完成 → 🟢 内容完成 → ✅ 全部完成（含 demo）
+| # | 章节 | 阶段 | 成熟度 | 小节 | Demo | 状态 |
+|---|------|------|--------|------|------|------|
+| 00 | 如何系统学习 CSS | 语言基础 | — | 6 | — | ✅ |
+| 01 | Introduction to CSS | 语言基础 | REC | 6 | ✓ | ✅ |
+| 02 | Syntax, Values & Units | 语言基础 | CRD | 10 | ✓ | ✅ |
+| 03 | Selectors | 语言基础 | REC | 8 | ✓ | ✅ |
+| 04 | Cascading & Inheritance | 语言基础 | CR | 7 | ✓ | ✅ |
+| 05 | Media Queries | 盒子与布局 | CR | 5 | ✓ | ✅ |
+| 06 | Box Model | 盒子与布局 | REC | 7 | ✓ | ✅ |
+| 07 | Writing Modes | 盒子与布局 | REC | 6 | — | ✅ |
+| 08 | Visual Formatting Model | 盒子与布局 | CR | 8 | ✓ | ✅ |
+| 09 | Flexbox Layout | 盒子与布局 | CRD | 5 | ✓ | ✅ |
+| 10 | Grid Layout | 盒子与布局 | CRD | 6 | ✓ | ✅ |
+| 11 | Box Alignment | 盒子与布局 | WD | 2 | ✓ | ✅ |
+| 12 | Multi-column Layout | 盒子与布局 | CR | 4 | ✓ | ✅ |
+| 13 | Table Layout | 盒子与布局 | REC | 4 | ✓ | ✅ |
+| 14 | Box Sizing | 盒子与布局 | WD | 4 | ✓ | ✅ |
+| 15 | Visual Effects | 视觉表现 | WD | 7 | ✓ | ✅ |
+| 16 | Generated Content & Lists | 视觉表现 | WD | 5 | ✓ | ✅ |
+| 17 | Colors & Backgrounds | 视觉表现 | CRD | 5 | ✓ | ✅ |
+| 18 | Fonts | 排版 | REC | 5 | ✓ | ✅ |
+| 19 | Text & Writing Modes | 排版 | CRD | 5 | ✓ | ✅ |
+| 20 | Transforms, Transitions & Animations | 动态与前沿 | CR | 5 | ✓ | ✅ |
+| 21 | Modern CSS | 动态与前沿 | WD | 7 | ✓ | ✅ |
+
+合计：**22 章 / 130 小节**，每章末尾配「完成基准」自测卡；4 张关键概念 Mermaid 图。
+
+状态说明：⚪ 未开始 → 🟡 骨架完成 → 🟢 内容完成 → ✅ 全部完成（含 demo / 自测）
 
 ---
 
@@ -640,6 +651,27 @@ specs/{name}.html  ──→  extract-content.js  ──→  specs/{name}-conten
 - 新章节只需创建 `chapters/{slug}.ts` 并在三个聚合文件中 import，无需修改渲染逻辑
 - `has-demo.ts` 使用静态注册表而非运行时检测，避免服务端组件引入客户端依赖
 - 术语和锚点与 sections 共置于同一文件，便于章节作者一站式维护
+
+---
+
+### 2026-06-20 系统化升级：方法论章 + 成熟度 + 自测 + 拆分 + 部署
+
+**做了什么**（按提交顺序，均已合并 main 并自动部署到 Vercel）：
+
+- **第 0 章「如何系统学习 CSS」**（6 节）：规范体系地图、概念依赖链、如何读规范、取值过程主线、成熟度判断、三步学习法 + 完成基准。
+- **Mermaid SVG 图表能力**：新增 `diagram` 内容块 + `MermaidDiagram` 客户端组件（懒加载、跟随主题）。修复了在 0 宽度容器（含 Monaco demo 的重页面 / 初始未布局 Accordion）中渲染空 SVG 的竞态：等容器有宽度再渲染 + ResizeObserver 重渲染。4 张图：依赖链、取值流水线、盒模型同心区域、视觉格式化八阶段。
+- **全模块成熟度徽章**（REC/CR/CRD/WD）：`moduleMaturity` 映射 + `MATURITY_INFO` + `SpecMaturityBadge`，首页卡片与章节页头部展示。
+- **第 7 章「书写模式」**（6 节）：物理/逻辑方向、inline/block 维度、writing-mode/direction/text-orientation、逻辑属性、作为 Flexbox/Grid 坐标系基础。
+- **「完成基准」自测卡**：`self-check.ts` + `SelfCheckCard`（可勾选、进度、localStorage、过关提示），覆盖全部 22 章。
+- **第 11 章「盒对齐」独立成章**：从原「尺寸计算与对齐」拆出 Box Alignment（css-align-3, WD，2 节 + 迁移 demo），原章重聚焦为「Box Sizing」（css-sizing-3/4）。
+- **全模块按真实依赖顺序重排编号**（0–21），修复历史编号错乱，使上一章/下一章导航遵循正确阅读顺序。
+
+**验证**：`next build` 绿灯（26 路由）；Playwright 全量爬取 22 章全部 HTTP 200，标题/小节/demo/自测均正确（box-alignment 2 demo、Box Sizing 4 demo 迁移无误）。
+
+**架构决策**：
+- 成熟度、自测题用独立映射文件（`moduleMaturity` / `self-check.ts`），避免逐个编辑 21 个模块对象。
+- 章节拆分时同步更新 `demos/index.tsx`、`has-demo.ts` 的注册表，保证迁移的 demo 不失联。
+- 编号重排用脚本按「阶段 moduleIds 顺序」批量赋值，保证 prev/next 与阅读顺序一致。
 
 ---
 
