@@ -29,6 +29,60 @@ import { sections as methodSections } from './chapters/method';
 export type ModuleStatus = 'current' | 'locked' | 'completed';
 
 // ============================================================
+// 规范成熟度（W3C Rec-track 阶段）
+// ============================================================
+
+export type SpecMaturity = 'REC' | 'CR' | 'CRD' | 'WD';
+
+/** 各模块主规范的成熟度（依据 CSS Snapshot 2026 / 各 TR 页头，截至 2026 年中）。
+ *  注：以模块「主规范」为准，具体日期以规范页头为准。method 为方法论，无成熟度。 */
+export const moduleMaturity: Record<string, SpecMaturity> = {
+  intro: 'REC',            // CSS2.2
+  syntax: 'CRD',           // css-values-3 / css-syntax-3
+  selectors: 'REC',        // selectors-3（selectors-4 仍为 WD）
+  cascade: 'CR',           // css-cascade-4/5
+  media: 'CR',             // mediaqueries-4
+  'box-model': 'REC',      // css-box-3
+  'visual-formatting': 'CR', // css-display-3 + CSS2 §9
+  flexbox: 'CRD',          // css-flexbox-1
+  grid: 'CRD',             // css-grid-1/2
+  multicol: 'CR',          // css-multicol-1
+  tables: 'REC',           // CSS2 §17
+  sizing: 'WD',            // css-sizing-3
+  'visual-effects': 'WD',  // css-overflow-3 / css-masking-1
+  'generated-content': 'WD', // css-content-3 / css-lists-3
+  'colors-backgrounds': 'CRD', // css-color-4
+  fonts: 'REC',            // css-fonts-3（css-fonts-4 为 WD）
+  text: 'CRD',             // css-text-3
+  transforms: 'CR',        // css-transforms-1
+  modern: 'WD',            // css-nesting-1 / css-scope-1 等
+};
+
+/** 成熟度的展示信息：标签、含义、配色 */
+export const MATURITY_INFO: Record<SpecMaturity, { label: LocaleText; desc: LocaleText; className: string }> = {
+  REC: {
+    label: { zh: '推荐标准', en: 'Recommendation' },
+    desc: { zh: '完成态，只通过勘误维护，最稳定', en: 'Finished; maintained only via errata' },
+    className: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400',
+  },
+  CR: {
+    label: { zh: '候选推荐', en: 'Candidate Recommendation' },
+    desc: { zh: '测试阶段，需两份独立实现，相对稳定', en: 'Testing stage; needs two interoperable implementations' },
+    className: 'border-blue-500/40 bg-blue-500/10 text-blue-700 dark:text-blue-400',
+  },
+  CRD: {
+    label: { zh: '候选推荐草案', en: 'CR Draft' },
+    desc: { zh: '编辑修订中的过渡候选推荐', en: 'Editor-revised transitional CR' },
+    className: 'border-sky-500/40 bg-sky-500/10 text-sky-700 dark:text-sky-400',
+  },
+  WD: {
+    label: { zh: '工作草案', en: 'Working Draft' },
+    desc: { zh: '设计阶段，内容可能大改', en: 'Design stage; content may change substantially' },
+    className: 'border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400',
+  },
+};
+
+// ============================================================
 // 教程内容块（TutorialBlock = 结构化教程内容）
 // ============================================================
 
