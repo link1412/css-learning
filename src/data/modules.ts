@@ -22,6 +22,7 @@ import { sections as modernSections } from './chapters/modern';
 import { sections as multicolSections } from './chapters/multicol';
 import { sections as tablesSections } from './chapters/tables';
 import { sections as methodSections } from './chapters/method';
+import { sections as writingModesSections } from './chapters/writing-modes';
 // ============================================================
 // 状态类型
 // ============================================================
@@ -43,6 +44,7 @@ export const moduleMaturity: Record<string, SpecMaturity> = {
   cascade: 'CR',           // css-cascade-4/5
   media: 'CR',             // mediaqueries-4
   'box-model': 'REC',      // css-box-3
+  'writing-modes': 'REC',  // css-writing-modes-3
   'visual-formatting': 'CR', // css-display-3 + CSS2 §9
   flexbox: 'CRD',          // css-flexbox-1
   grid: 'CRD',             // css-grid-1/2
@@ -159,7 +161,7 @@ export const stages: Stage[] = [
     title: { zh: '盒子与布局', en: 'Box & Layout' },
     icon: Layout,
     description: { zh: '从盒模型到完整的布局系统', en: 'From box model to complete layout system' },
-    moduleIds: ['media', 'box-model', 'visual-formatting', 'flexbox', 'grid', 'multicol', 'tables', 'sizing'],
+    moduleIds: ['media', 'box-model', 'writing-modes', 'visual-formatting', 'flexbox', 'grid', 'multicol', 'tables', 'sizing'],
   },
   {
     id: 'visual',
@@ -333,9 +335,27 @@ export const modules: Record<string, Module> = {
     sections: boxModelSections,
   },
 
+  'writing-modes': {
+    id: 'writing-modes',
+    number: 7,
+    title: { zh: '书写模式', en: 'Writing Modes' },
+    description: { zh: '横排竖排、逻辑方向、inline/block 维度与逻辑属性', en: 'Horizontal/vertical text, logical directions, inline/block dimensions and logical properties' },
+    status: 'current' as const,
+    specs: ['css-writing-modes-3'],
+    specUrl: 'https://www.w3.org/TR/css-writing-modes-3/',
+    keyConcept: {
+      title: { zh: '现代布局的坐标系基础', en: 'The Coordinate Basis of Modern Layout' },
+      content: {
+        zh: '书写模式把盒布局从写死的物理方向（top/left）抽象成跟随文字流向的逻辑方向（block/inline）。Flexbox 的主轴/交叉轴、Grid 的行列、Box Alignment 的 start/end 全部建立在这套抽象之上——先懂它，布局算法才讲得通。',
+        en: 'Writing Modes abstracts box layout from physical directions into flow-relative ones (block/inline). Flexbox axes, Grid rows/columns, and Box Alignment all build on this—understand it first, and layout algorithms click.',
+      },
+    },
+    sections: writingModesSections,
+  },
+
   'visual-formatting': {
     id: 'visual-formatting',
-    number: 7,
+    number: 8,
     title: { zh: '视觉格式化模型', en: 'Visual Formatting Model' },
     description: { zh: 'display、格式化上下文、Normal Flow、浮动、定位', en: 'display, formatting contexts, Normal Flow, floats, positioning' },
     status: 'current',
@@ -354,7 +374,7 @@ export const modules: Record<string, Module> = {
 
   flexbox: {
     id: 'flexbox',
-    number: 16,
+    number: 9,
     title: { zh: 'Flexbox 弹性布局', en: 'Flexbox Layout' },
     description: { zh: 'Flex 容器与项目、弹性尺寸计算、主轴与交叉轴对齐', en: 'Flex containers and items, flexible sizing, main and cross axis alignment' },
     status: 'current' as const,
@@ -372,7 +392,7 @@ export const modules: Record<string, Module> = {
 
   grid: {
     id: 'grid',
-    number: 17,
+    number: 10,
     title: { zh: 'Grid 网格布局', en: 'Grid Layout' },
     description: { zh: '二维网格系统、模板定义、项目放置、子网格', en: 'Two-dimensional grid system, template definitions, item placement, subgrid' },
     status: 'current' as const,
@@ -390,7 +410,7 @@ export const modules: Record<string, Module> = {
 
   multicol: {
     id: 'multicol',
-    number: 18,
+    number: 11,
     title: { zh: '多列布局', en: 'Multi-column Layout' },
     description: { zh: '多列容器、列宽与列数、列间距与列规则、列跨越', en: 'Multi-column containers, column width and count, gaps and rules, column spanning' },
     status: 'current' as const,
@@ -408,7 +428,7 @@ export const modules: Record<string, Module> = {
 
   tables: {
     id: 'tables',
-    number: 19,
+    number: 12,
     title: { zh: '表格布局', en: 'Table Layout' },
     description: { zh: 'CSS 表格模型、边框模型、表格布局算法', en: 'CSS table model, border models, table layout algorithms' },
     status: 'current' as const,
@@ -427,7 +447,7 @@ export const modules: Record<string, Module> = {
 
   sizing: {
     id: 'sizing',
-    number: 8,
+    number: 13,
     title: { zh: '尺寸计算与对齐', en: 'Sizing & Alignment' },
     description: { zh: 'width/height 计算规则、包含块、内在尺寸、盒对齐', en: 'width/height calculation rules, containing blocks, intrinsic sizing, box alignment' },
     status: 'current',
@@ -450,7 +470,7 @@ export const modules: Record<string, Module> = {
 
   'visual-effects': {
     id: 'visual-effects',
-    number: 9,
+    number: 14,
     title: { zh: '视觉效果', en: 'Visual Effects' },
     description: { zh: 'overflow、裁剪、visibility、滤镜、混合模式', en: 'overflow, clipping, visibility, filters, blend modes' },
     status: 'current',
@@ -469,7 +489,7 @@ export const modules: Record<string, Module> = {
 
   'generated-content': {
     id: 'generated-content',
-    number: 10,
+    number: 15,
     title: { zh: '生成内容与列表', en: 'Generated Content & Lists' },
     description: { zh: '::before/::after、计数器、列表样式', en: '::before/::after, counters, list styles' },
     status: 'current',
@@ -488,7 +508,7 @@ export const modules: Record<string, Module> = {
 
   'colors-backgrounds': {
     id: 'colors-backgrounds',
-    number: 11,
+    number: 16,
     title: { zh: '颜色与背景', en: 'Colors & Backgrounds' },
     description: { zh: '颜色模型、色彩空间、背景属性、渐变、圆角、阴影', en: 'Color models, color spaces, background properties, gradients, border-radius, shadows' },
     status: 'current',
@@ -511,7 +531,7 @@ export const modules: Record<string, Module> = {
 
   fonts: {
     id: 'fonts',
-    number: 12,
+    number: 17,
     title: { zh: '字体', en: 'Fonts' },
     description: { zh: '字体选择、@font-face、字体匹配算法', en: 'Font selection, @font-face, font matching algorithm' },
     status: 'current',
@@ -530,7 +550,7 @@ export const modules: Record<string, Module> = {
 
   text: {
     id: 'text',
-    number: 13,
+    number: 18,
     title: { zh: '文本与书写模式', en: 'Text & Writing Modes' },
     description: { zh: '文本属性、装饰、对齐、断行规则、书写方向', en: 'Text properties, decoration, alignment, line-breaking rules, writing directions' },
     status: 'current',
@@ -553,7 +573,7 @@ export const modules: Record<string, Module> = {
 
   transforms: {
     id: 'transforms',
-    number: 14,
+    number: 19,
     title: { zh: '变换、过渡与动画', en: 'Transforms, Transitions & Animations' },
     description: { zh: '2D/3D 变换、过渡效果、关键帧动画、缓动函数', en: '2D/3D transforms, transitions, keyframe animations, easing functions' },
     status: 'current',
@@ -571,7 +591,7 @@ export const modules: Record<string, Module> = {
 
   modern: {
     id: 'modern',
-    number: 15,
+    number: 20,
     title: { zh: '现代 CSS 新特性', en: 'Modern CSS' },
     description: { zh: '容器查询、CSS 嵌套、@scope、content-visibility、滚动吸附、CSS UI', en: 'Container queries, CSS nesting, @scope, content-visibility, Scroll Snap, CSS UI' },
     status: 'current',
