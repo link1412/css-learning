@@ -697,11 +697,13 @@ export const demoRegistry: Record<string, Record<string, ComponentType>> = {
   },
   sizing: {
     'containing-block': ContainingBlockDemo,
-    'baseline-alignment': BaselineAlignmentDemo,
     'width-calculation': WidthCalcDemo,
     'height-calculation': HeightCalcDemo,
-    alignment: BoxAlignmentDemo,
     'intrinsic-sizing': IntrinsicSizingDemo,
+  },
+  'box-alignment': {
+    alignment: BoxAlignmentDemo,
+    'baseline-alignment': BaselineAlignmentDemo,
   },
   flexbox: {
     'flex-container': FlexContainerDemo,

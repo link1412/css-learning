@@ -23,6 +23,7 @@ import { sections as multicolSections } from './chapters/multicol';
 import { sections as tablesSections } from './chapters/tables';
 import { sections as methodSections } from './chapters/method';
 import { sections as writingModesSections } from './chapters/writing-modes';
+import { sections as boxAlignmentSections } from './chapters/box-alignment';
 // ============================================================
 // 状态类型
 // ============================================================
@@ -45,6 +46,7 @@ export const moduleMaturity: Record<string, SpecMaturity> = {
   media: 'CR',             // mediaqueries-4
   'box-model': 'REC',      // css-box-3
   'writing-modes': 'REC',  // css-writing-modes-3
+  'box-alignment': 'WD',   // css-align-3
   'visual-formatting': 'CR', // css-display-3 + CSS2 §9
   flexbox: 'CRD',          // css-flexbox-1
   grid: 'CRD',             // css-grid-1/2
@@ -161,7 +163,7 @@ export const stages: Stage[] = [
     title: { zh: '盒子与布局', en: 'Box & Layout' },
     icon: Layout,
     description: { zh: '从盒模型到完整的布局系统', en: 'From box model to complete layout system' },
-    moduleIds: ['media', 'box-model', 'writing-modes', 'visual-formatting', 'flexbox', 'grid', 'multicol', 'tables', 'sizing'],
+    moduleIds: ['media', 'box-model', 'writing-modes', 'visual-formatting', 'flexbox', 'grid', 'box-alignment', 'multicol', 'tables', 'sizing'],
   },
   {
     id: 'visual',
@@ -408,9 +410,27 @@ export const modules: Record<string, Module> = {
     sections: gridSections,
   },
 
+  'box-alignment': {
+    id: 'box-alignment',
+    number: 11,
+    title: { zh: '盒对齐', en: 'Box Alignment' },
+    description: { zh: '跨布局模式的统一对齐系统：justify/align、分布对齐、基线对齐、gap', en: 'Unified alignment across layouts: justify/align, distribution, baseline alignment, gap' },
+    status: 'current',
+    specs: ['css-align-3'],
+    specUrl: 'https://www.w3.org/TR/css-align-3/',
+    keyConcept: {
+      title: { zh: '对齐独立于布局模式', en: 'Alignment Independent of Layout' },
+      content: {
+        zh: 'Box Alignment 把对齐从各布局模块抽出，成为 block / flex / grid / 多列共用的一套属性（justify-*/align-*/place-*/gap）。它建立在书写模式的 inline/block 抽象之上——所以 start/end 跟随文字方向，而非写死左右。',
+        en: 'Box Alignment extracts alignment into one set of properties shared by block/flex/grid/multicol (justify-*/align-*/place-*/gap), built on the inline/block abstraction of Writing Modes—so start/end follow text direction.',
+      },
+    },
+    sections: boxAlignmentSections,
+  },
+
   multicol: {
     id: 'multicol',
-    number: 11,
+    number: 12,
     title: { zh: '多列布局', en: 'Multi-column Layout' },
     description: { zh: '多列容器、列宽与列数、列间距与列规则、列跨越', en: 'Multi-column containers, column width and count, gaps and rules, column spanning' },
     status: 'current' as const,
@@ -428,7 +448,7 @@ export const modules: Record<string, Module> = {
 
   tables: {
     id: 'tables',
-    number: 12,
+    number: 13,
     title: { zh: '表格布局', en: 'Table Layout' },
     description: { zh: 'CSS 表格模型、边框模型、表格布局算法', en: 'CSS table model, border models, table layout algorithms' },
     status: 'current' as const,
@@ -447,18 +467,18 @@ export const modules: Record<string, Module> = {
 
   sizing: {
     id: 'sizing',
-    number: 13,
-    title: { zh: '尺寸计算与对齐', en: 'Sizing & Alignment' },
-    description: { zh: 'width/height 计算规则、包含块、内在尺寸、盒对齐', en: 'width/height calculation rules, containing blocks, intrinsic sizing, box alignment' },
+    number: 14,
+    title: { zh: '尺寸计算', en: 'Box Sizing' },
+    description: { zh: 'width/height 计算规则、包含块、内在尺寸与宽高比', en: 'width/height calculation rules, containing blocks, intrinsic sizing and aspect ratio' },
     status: 'current',
-    specs: ['css-sizing-3', 'css-sizing-4', 'css-align-3'],
+    specs: ['css-sizing-3', 'css-sizing-4'],
     specUrl: 'https://www.w3.org/TR/css-sizing-3/',
     css2Chapters: [10],
     keyConcept: {
-      title: { zh: '核心概念', en: 'Core Concept' },
+      title: { zh: '内在尺寸 vs 外在尺寸', en: 'Intrinsic vs Extrinsic Sizing' },
       content: {
-        zh: '包含块决定元素尺寸和位置的计算基准。CSS 为不同类型的元素定义了详细的宽度和高度计算规则。CSS3 引入了内在尺寸关键字（min-content、max-content、fit-content）和 aspect-ratio 属性，使得响应式设计更加灵活。Box Alignment 模块提供了统一的对齐属性系统。',
-        en: 'The containing block determines the reference for calculating element size and position. CSS defines detailed width and height calculation rules for different element types. CSS3 introduces intrinsic sizing keywords (min-content, max-content, fit-content) and aspect-ratio property, making responsive design more flexible. The Box Alignment module provides a unified alignment property system.',
+        zh: '包含块决定元素尺寸的计算基准。CSS 把尺寸分为「外在尺寸」（由上下文/容器决定）与「内在尺寸」（由内容决定）。CSS3 引入 min-content、max-content、fit-content 关键字与 aspect-ratio，把 CSS2 里含糊的「自动尺寸」精确化，是 Flexbox/Grid 尺寸算法的基础。',
+        en: 'The containing block is the reference for size calculation. CSS distinguishes extrinsic sizing (from context/container) and intrinsic sizing (from content). CSS3 introduces min-content/max-content/fit-content and aspect-ratio, formalizing CSS2 auto sizing—the basis of Flexbox/Grid sizing.',
       },
     },
     sections: sizingSections,
@@ -470,7 +490,7 @@ export const modules: Record<string, Module> = {
 
   'visual-effects': {
     id: 'visual-effects',
-    number: 14,
+    number: 15,
     title: { zh: '视觉效果', en: 'Visual Effects' },
     description: { zh: 'overflow、裁剪、visibility、滤镜、混合模式', en: 'overflow, clipping, visibility, filters, blend modes' },
     status: 'current',
@@ -489,7 +509,7 @@ export const modules: Record<string, Module> = {
 
   'generated-content': {
     id: 'generated-content',
-    number: 15,
+    number: 16,
     title: { zh: '生成内容与列表', en: 'Generated Content & Lists' },
     description: { zh: '::before/::after、计数器、列表样式', en: '::before/::after, counters, list styles' },
     status: 'current',
@@ -508,7 +528,7 @@ export const modules: Record<string, Module> = {
 
   'colors-backgrounds': {
     id: 'colors-backgrounds',
-    number: 16,
+    number: 17,
     title: { zh: '颜色与背景', en: 'Colors & Backgrounds' },
     description: { zh: '颜色模型、色彩空间、背景属性、渐变、圆角、阴影', en: 'Color models, color spaces, background properties, gradients, border-radius, shadows' },
     status: 'current',
@@ -531,7 +551,7 @@ export const modules: Record<string, Module> = {
 
   fonts: {
     id: 'fonts',
-    number: 17,
+    number: 18,
     title: { zh: '字体', en: 'Fonts' },
     description: { zh: '字体选择、@font-face、字体匹配算法', en: 'Font selection, @font-face, font matching algorithm' },
     status: 'current',
@@ -550,7 +570,7 @@ export const modules: Record<string, Module> = {
 
   text: {
     id: 'text',
-    number: 18,
+    number: 19,
     title: { zh: '文本与书写模式', en: 'Text & Writing Modes' },
     description: { zh: '文本属性、装饰、对齐、断行规则、书写方向', en: 'Text properties, decoration, alignment, line-breaking rules, writing directions' },
     status: 'current',
@@ -573,7 +593,7 @@ export const modules: Record<string, Module> = {
 
   transforms: {
     id: 'transforms',
-    number: 19,
+    number: 20,
     title: { zh: '变换、过渡与动画', en: 'Transforms, Transitions & Animations' },
     description: { zh: '2D/3D 变换、过渡效果、关键帧动画、缓动函数', en: '2D/3D transforms, transitions, keyframe animations, easing functions' },
     status: 'current',
@@ -591,7 +611,7 @@ export const modules: Record<string, Module> = {
 
   modern: {
     id: 'modern',
-    number: 20,
+    number: 21,
     title: { zh: '现代 CSS 新特性', en: 'Modern CSS' },
     description: { zh: '容器查询、CSS 嵌套、@scope、content-visibility、滚动吸附、CSS UI', en: 'Container queries, CSS nesting, @scope, content-visibility, Scroll Snap, CSS UI' },
     status: 'current',

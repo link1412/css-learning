@@ -57,6 +57,12 @@ export const selfCheck: Record<string, string[]> = {
     '`fr` 单位与 `minmax()` 各解决什么问题？',
     'subgrid（Level 2）让子网格获得了什么能力？',
   ],
+  'box-alignment': [
+    '`justify-*` 与 `align-*` 分别沿哪根轴？为什么说方向取决于 writing-mode？',
+    '`space-between` / `space-around` / `space-evenly` 的间距分配有何不同？',
+    '为什么 `justify-self` 在 Flexbox 中不生效，而在 Grid 中有效？',
+    '基线对齐（baseline）相比 `center` 适合什么场景？合成基线如何产生？',
+  ],
   media: [
     '媒体查询的「媒体类型」与「媒体特性」有什么区别？',
     '为什么移动优先（min-width）通常优于桌面优先（max-width）？',

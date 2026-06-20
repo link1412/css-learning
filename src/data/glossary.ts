@@ -29,6 +29,7 @@ import { glossaryTerms as multicolTerms } from './chapters/multicol';
 import { glossaryTerms as tablesTerms } from './chapters/tables';
 import { glossaryTerms as methodTerms } from './chapters/method';
 import { glossaryTerms as writingModesTerms } from './chapters/writing-modes';
+import { glossaryTerms as boxAlignmentTerms } from './chapters/box-alignment';
 
 export interface GlossaryEntry {
   /** 中文翻译 */
@@ -66,6 +67,7 @@ export const glossary: Record<string, GlossaryEntry> = {
   ...tablesTerms,
   ...methodTerms,
   ...writingModesTerms,
+  ...boxAlignmentTerms,
 };
 
 export function lookupGlossary(term: string): GlossaryEntry | null {
