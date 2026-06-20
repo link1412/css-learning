@@ -1,5 +1,6 @@
 import type { TutorialBlock } from '@/data/modules';
 import type { ReactNode } from 'react';
+import { MermaidDiagram } from '@/components/MermaidDiagram';
 
 // ============================================================
 // Inline text parser: handles `code` and **bold** only
@@ -151,6 +152,8 @@ export function TutorialRenderer({ blocks }: { blocks: TutorialBlock[] }) {
             return <ExampleBlock key={i} title={block.title} code={block.code} lang={block.lang} explanation={block.explanation} />;
           case 'list':
             return <ListBlock key={i} items={block.items} ordered={block.ordered} />;
+          case 'diagram':
+            return <MermaidDiagram key={i} code={block.code} caption={block.caption} />;
           default:
             return null;
         }

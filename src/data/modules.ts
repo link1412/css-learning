@@ -21,6 +21,7 @@ import { sections as transformsSections } from './chapters/transforms';
 import { sections as modernSections } from './chapters/modern';
 import { sections as multicolSections } from './chapters/multicol';
 import { sections as tablesSections } from './chapters/tables';
+import { sections as methodSections } from './chapters/method';
 // ============================================================
 // 状态类型
 // ============================================================
@@ -38,7 +39,8 @@ export type TutorialBlock =
   | { type: 'tip'; text: string }
   | { type: 'warning'; text: string }
   | { type: 'example'; title: string; code: string; lang?: string; explanation: string }
-  | { type: 'list'; items: string[]; ordered?: boolean };
+  | { type: 'list'; items: string[]; ordered?: boolean }
+  | { type: 'diagram'; code: string; caption?: string };
 
 // ============================================================
 // 小节数据（Section = 模块内小节）
@@ -96,7 +98,7 @@ export const stages: Stage[] = [
     title: { zh: '语言基础', en: 'Fundamentals' },
     icon: BookOpen,
     description: { zh: 'CSS 语言的核心机制与规则', en: 'Core mechanisms and rules of CSS language' },
-    moduleIds: ['intro', 'syntax', 'selectors', 'cascade'],
+    moduleIds: ['method', 'intro', 'syntax', 'selectors', 'cascade'],
   },
   {
     id: 'box-layout',
@@ -133,6 +135,28 @@ export const stages: Stage[] = [
 // ============================================================
 
 export const modules: Record<string, Module> = {
+  // ──────────────────────────────────────────────
+  // 第 0 章：学习方法论（元层）
+  // ──────────────────────────────────────────────
+
+  method: {
+    id: 'method',
+    number: 0,
+    title: { zh: '如何系统学习 CSS', en: 'How to Study CSS Systematically' },
+    description: { zh: '规范体系地图、概念依赖链、阅读方法论与学习法', en: 'Spec landscape, dependency chain, reading methodology and study method' },
+    status: 'completed',
+    specs: [],
+    specUrl: 'https://www.w3.org/Style/CSS/read.en.html',
+    keyConcept: {
+      title: { zh: '先建立地图，再深入细节', en: 'Map First, Then Details' },
+      content: {
+        zh: '在学任何具体属性之前，先理解 CSS 规范如何组织、概念之间如何依赖、规范该怎么读。这一章是整个学习体系的「元层」——它决定你后面学得系统还是零散。',
+        en: 'Before learning any specific property, understand how CSS specs are organized, how concepts depend on each other, and how to read a spec. This chapter is the meta-layer of the whole curriculum.',
+      },
+    },
+    sections: methodSections,
+  },
+
   // ──────────────────────────────────────────────
   // 阶段 1：语言基础
   // ──────────────────────────────────────────────
